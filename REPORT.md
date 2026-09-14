@@ -1,9 +1,9 @@
 
 # Báo cáo — Ngày 2: phát hiện vật thể
 
-**Họ và tên:** Võ Quốc Dinh
-**MSSV:** 2A202602318
-**Hình thức:** cá nhân
+**Họ và tên:** Võ Quốc Dinh<br>
+**MSSV:** 2A202602318<br>
+**Hình thức:** cá nhân<br>
 **Mã cặp:** SOLO
 
 ## 1. Bài độc lập và nguồn dữ liệu
@@ -50,11 +50,11 @@ nên `visibility=occluded`, nhưng phần nhìn thấy vẫn đủ căn cứ nê
 
 | Trước khi sửa                                                                                                             | Loại lỗi   | Cách phát hiện                                                                                      | Sau khi sửa và quy tắc                                                                                                                                                             |
 | ---------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `drive_008`: có hộp cho hai xe nhỏ ở mép trên (x ≈ 483–513, y 0–25) và xe ở đỉnh ảnh (x ≈ 205–215, y 0–8) | phạm vi     | phóng 100%: xe bị cắt, quá nhỏ và mờ, không phân biệt được`car`/`van`                 | xóa hộp; quy tắc "quá nhỏ hoặc mờ đến mức không thể phân lớp có căn cứ: không đoán", ghi vào nhật ký                                                           |
+| `drive_008`: có hộp cho hai xe nhỏ ở mép trên (x ≈ 483–513, y 0–25) và xe ở đỉnh ảnh (x ≈ 205–215, y 0–8) | phạm vi     | phóng 100%: xe bị cắt, quá nhỏ và mờ, không phân biệt được `car`/`van`                 | xóa hộp; quy tắc "quá nhỏ hoặc mờ đến mức không thể phân lớp có căn cứ: không đoán", ghi vào nhật ký                                                           |
 | `drive_008`: có hộp cho vật màu đỏ sát mép phải (x ≈ 623–640, y 259–345)                                       | phạm vi     | phóng 100% chỉ thấy một dải tối, không có dấu hiệu phương tiện                            | xóa hộp, ghi lý do vào nhật ký quyết định                                                                                                                                    |
-| `drive_008`: hộp cho xe mờ trong hàng xe phía trên (x ≈ 380–397, y 3–20)                                           | hình học   | rà vật thể trùng: hộp dính liền với xe#26 phía trước, không tách được thành xe riêng | xóa để tránh gán trùng; quy tắc "mỗi phương tiện là một hộp"                                                                                                            |
-| `drive_033`: hộp cho xe mờ phía trước taxi #41 (x ≈ 353–373, y 105–128)                                            | hình học   | rà vật thể trùng: hình nhòe, không tách rõ khỏi#41                                           | xóa để tránh gán trùng                                                                                                                                                          |
-| `drive_008` r24 (#13): `review_state=needs_review`                                                                       | thuộc tính | lọc các hộp`needs_review` khi tự kiểm tra                                                       | xem lại ở 100%: bị mép ảnh cắt chứ không bị che, nên`boundary=truncated`, `visibility=unclear`; dáng thân thấp đủ căn cứ cho `car`, chuyển sang `confident` |
+| `drive_008`: hộp cho xe mờ trong hàng xe phía trên (x ≈ 380–397, y 3–20)                                           | hình học   | rà vật thể trùng: hộp dính liền với xe #26 phía trước, không tách được thành xe riêng | xóa để tránh gán trùng; quy tắc "mỗi phương tiện là một hộp"                                                                                                            |
+| `drive_033`: hộp cho xe mờ phía trước taxi #41 (x ≈ 353–373, y 105–128)                                            | hình học   | rà vật thể trùng: hình nhòe, không tách rõ khỏi #41                                           | xóa để tránh gán trùng                                                                                                                                                          |
+| `drive_008` r24 (#13): `review_state=needs_review`                                                                       | thuộc tính | lọc các hộp `needs_review` khi tự kiểm tra                                                       | xem lại ở 100%: bị mép ảnh cắt chứ không bị che, nên `boundary=truncated`, `visibility=unclear`; dáng thân thấp đủ căn cứ cho `car`, chuyển sang `confident` |
 
 - Số hộp `needs_review` trước và sau khi kiểm: số trước (ít nhất 1, là hộp #13) → 0 sau khi kiểm
 - Một quyết định chưa đủ bằng chứng và cách bạn xin hỗ trợ: các xe rất xa ở đầu đường `drive_033` không được gán vì không phân biệt được lớp. Tôi ghi tọa độ vào nhật ký quyết định
@@ -80,24 +80,25 @@ mới phát hiện được các lỗi này.
 
 - Ba mã ảnh huấn luyện: `drive_022`, `drive_033`, `drive_038`
 - Mã ảnh thẩm định: `drive_008`
-- Mô tả một dự đoán trong `detect_result.jpg`: ảnh không có hộp dự đoán nào ở ngưỡng tin cậy 0,25. Khi thử hạ ngưỡng
-  xuống 0,01 để chẩn đoán, mô hình vẫn không đưa ra hộp nào, trong khi nhãn của tôi ở `drive_008` có 25 vật thể
-  (18 `car`, 1 `truck`, 3 `bus`, 3 `van`). Chỉ số lúc thẩm định: precision 0,0025, recall 0,1667, mAP50 0,0083,
-  mAP50-95 0,0042. Lần chạy: YOLO11n (`0ebbc80d…44ee1`), Ultralytics 8.4.145, 8 vòng lặp, hạt giống 42, thiết bị
-  CPU, 27,89 giây.
+- Mô tả một dự đoán trong `detect_result.jpg`: ảnh không có hộp dự đoán nào ở ngưỡng tin cậy 0,25, trong khi nhãn
+  của tôi ở `drive_008` có 25 vật thể (18 `car`, 1 `truck`, 3 `bus`, 3 `van`). Lần chạy theo `training_run.json`:
+  YOLO11n (`0ebbc80d…44ee1`), Ultralytics 8.4.145, 8 vòng lặp, hạt giống 42, GPU trên Colab (`device=0`), 44,43 giây.
+  Để chẩn đoán thêm, tôi chạy lại cùng cấu hình trên máy cá nhân bằng CPU: kết quả vẫn không có hộp nào kể cả khi hạ
+  ngưỡng xuống 0,01, và chỉ số lúc thẩm định là precision 0,0025, recall 0,1667, mAP50 0,0083, mAP50-95 0,0042.
 - Dự đoán đó gợi ý cần kiểm lại quy tắc hoặc dữ liệu nào? Kết quả rỗng trước hết là tín hiệu về lượng dữ liệu và
   cấu hình, chưa phải về nhãn: đầu phát hiện được khởi tạo lại cho 4 lớp, 10 lớp đầu bị đóng băng, và chỉ học 8 vòng
   trên 3 ảnh. Về dữ liệu, ba lớp hiếm trong ba ảnh huấn luyện chỉ có 4 `truck`, 7 `bus`, 3 `van`, không đủ để mô hình
   học phân biệt. Ranh giới `van`/`truck`/`bus` (Tình huống A, B) là chỗ cần thêm ảnh ví dụ nhất.
-- Minh chứng nào có thể bác bỏ nhận định của bạn? Nếu chạy lại cùng dữ liệu với nhiều vòng lặp hơn, không đóng băng
-  lớp, hoặc trên GPU, mà mô hình vẫn không phát hiện được cả những xe `car` lớn và rõ (ví dụ `drive_008` r18), thì
+- Minh chứng nào có thể bác bỏ nhận định của bạn? Việc chạy trên GPU (Colab) và CPU đều cho ảnh dự đoán rỗng giống
+  hệt nhau cho thấy thiết bị không phải nguyên nhân. Nếu chạy lại cùng dữ liệu với nhiều vòng lặp hơn và không đóng
+  băng lớp mà mô hình vẫn không phát hiện được cả những xe `car` lớn và rõ (ví dụ `drive_008` r18), thì
   nguyên nhân không nằm ở số vòng lặp mà ở đường ống dữ liệu, chẳng hạn ánh xạ mã lớp hoặc ghép ảnh–nhãn. Khi đó cần
   kiểm `data.yaml` và thư mục `dataset` do sổ thực hành tạo.
 - Vì sao kết quả trên bốn ảnh không phải phép đánh giá mô hình dùng thực tế?
 
 Chỉ có 3 ảnh huấn luyện và 1 ảnh thẩm định, nên một hộp đúng hay sai cũng làm chỉ số dao động rất mạnh. Bốn ảnh có
 thể là các khung hình liên quan về thời gian của cùng nguồn video, không đại diện cho góc camera, thời tiết hay ban
-đêm. Cấu hình (8 vòng lặp, đóng băng 10 lớp, chạy CPU) chỉ nhằm kiểm tra đường ống dữ liệu chạy thông suốt. mAP ở
+đêm. Cấu hình (8 vòng lặp, đóng băng 10 lớp) chỉ nhằm kiểm tra đường ống dữ liệu chạy thông suốt. mAP ở
 đây vì vậy không dùng để chấm người gán nhãn và không nói gì về khả năng dùng mô hình trong thực tế.
 
 ## 6. Đối chiếu nhãn

@@ -1,8 +1,8 @@
 # Phiếu quy tắc gán nhãn — Ngày 2
 
-**Họ và tên:** Võ Quốc Dinh
-**MSSV:** 2A202602318
-**Hình thức:** cá nhân
+**Họ và tên:** Võ Quốc Dinh<br>
+**MSSV:** 2A202602318<br>
+**Hình thức:** cá nhân<br>
 **Mã cặp:** SOLO
 
 ## 1. Phạm vi
